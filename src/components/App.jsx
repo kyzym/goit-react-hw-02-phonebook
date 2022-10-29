@@ -1,52 +1,39 @@
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 import { ContactsList } from './ContactsList';
 import initialContacts from './contacts.json';
+import { Form } from './Form';
 
 export class App extends Component {
   state = {
     contacts: initialContacts,
-    name: '',
+    filter: '',
   };
 
   deleteContact = contactId => {
-    this.setState(p => ({
-      contacts: p.contacts.filter(contact => contact.id !== contactId),
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(({ id }) => id !== contactId),
     }));
   };
 
-  handleChange = e => {
-    this.setState({ name: e.target.value });
-  };
+  addContact = ({ name, number }) => {
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
 
-  handleSubmit = evt => {
-    evt.preventDefault();
-    console.log(`Name: ${this.state.name}`);
-
-    this.props.onSubmit({ ...this.state });
+    this.setState(({ contacts }) => ({ contacts: [newContact, ...contacts] }));
   };
 
   render() {
-    const { name, contacts } = this.state;
+    const { contacts } = this.state;
     const { deleteContact } = this;
 
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-              onChange={this.handleChange}
-              placeholder="Enter name"
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <Form onSubmit={this.addContact} />
+
         <ContactsList contacts={contacts} onDeleteContact={deleteContact} />
 
         <div>
