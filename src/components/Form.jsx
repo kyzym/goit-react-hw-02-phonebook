@@ -40,6 +40,7 @@ export class Form extends Component {
             onChange={this.handleChange}
           />
         </label>
+
         <button type="submit">Submit</button>
       </form>
     );
