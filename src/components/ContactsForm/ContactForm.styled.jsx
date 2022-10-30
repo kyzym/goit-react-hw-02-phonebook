@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const H1 = styled.h1`
+export const Title = styled.h1`
   display: flex;
   align-items: center;
   gap: 6px;
   margin-bottom: 10px;
 `;
 
-export const H2 = styled.h2`
+export const SubTitle = styled.h2`
   display: flex;
   align-items: flex-end;
   gap: 6px;

@@ -7,7 +7,7 @@ import { Form } from './ContactsForm/ContactsForm';
 import { ContactsList } from './ContactList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { FcContacts, FcList } from 'react-icons/fc';
-import { H1, H2 } from './ContactsForm/ContactForm.styled';
+import { Title, SubTitle } from './ContactsForm/ContactForm.styled';
 
 export class App extends Component {
   state = {
@@ -56,16 +56,16 @@ export class App extends Component {
         mt={10}
         px={10}
       >
-        <H1>
+        <Title>
           Phonebook
           <FcContacts />
-        </H1>
+        </Title>
         <Form onSubmit={addContact} />
 
-        <H2>
+        <SubTitle>
           Contacts
           <FcList />
-        </H2>
+        </SubTitle>
         <Filter value={filter} onChange={changeFilter} />
         <ContactsList
           contacts={filteredContacts}
