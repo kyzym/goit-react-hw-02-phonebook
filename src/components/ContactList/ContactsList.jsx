@@ -1,20 +1,22 @@
 import { Box } from '../utils/Box.styled';
-import { Contact } from './ContactsList.styled';
+import { Contact, DelButton } from './ContactsList.styled';
 import { PropTypes } from 'prop-types';
+import { BsPhone } from 'react-icons/bs';
 
 export const ContactsList = ({ contacts, onDeleteContact }) => (
-  <Box as="ul" display="grid" gridGap={10}>
+  <Box as="ul" width="31%">
     {contacts.map(({ id, name, number }) => (
       <Contact key={id}>
+        <BsPhone />
         <p>{name}</p>
         <p>{number}</p>
-        <button
+        <DelButton
           onClick={() => {
             onDeleteContact(id);
           }}
         >
-          удалить
-        </button>
+          Delete
+        </DelButton>
       </Contact>
     ))}
   </Box>

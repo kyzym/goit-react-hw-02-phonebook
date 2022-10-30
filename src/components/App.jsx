@@ -6,6 +6,8 @@ import initialContacts from './data/contacts.json';
 import { Form } from './ContactsForm/ContactsForm';
 import { ContactsList } from './ContactList/ContactsList';
 import { Filter } from './Filter/Filter';
+import { FcContacts, FcList } from 'react-icons/fc';
+import { H1, H2 } from './ContactsForm/ContactForm.styled';
 
 export class App extends Component {
   state = {
@@ -47,11 +49,23 @@ export class App extends Component {
     );
 
     return (
-      <Box display="flex" flexDirection="column" alignItems="center" mt={10}>
-        <h1>Phonebook</h1>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        mt={10}
+        px={10}
+      >
+        <H1>
+          Phonebook
+          <FcContacts />
+        </H1>
         <Form onSubmit={addContact} />
 
-        <h2>Contacts</h2>
+        <H2>
+          Contacts
+          <FcList />
+        </H2>
         <Filter value={filter} onChange={changeFilter} />
         <ContactsList
           contacts={filteredContacts}
@@ -59,7 +73,7 @@ export class App extends Component {
         />
 
         <div>
-          <span>Общее количество контактов: {contacts.length}</span>
+          <span>Total number of contacts: {contacts.length}</span>
         </div>
       </Box>
     );
