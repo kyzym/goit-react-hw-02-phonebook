@@ -4,6 +4,7 @@ import initialContacts from './contacts.json';
 import { Form } from './Form';
 import { ContactsList } from './ContactsList';
 import { Filter } from './Filter';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export class App extends Component {
   state = {
@@ -24,27 +25,35 @@ export class App extends Component {
       number,
     };
 
-    // this.setState(p => console.log(p.filter(item => console.log(item))));
+    if (this.state.contacts.some(contact => contact.name === name)) {
+      return Notify.warning("Can't add already existing contact");
+    }
+
     this.setState(({ contacts }) => ({ contacts: [newContact, ...contacts] }));
   };
 
   changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value });
+    this.setState({ filter: e.currentTarget.value.trim() });
   };
+
+  // reset = () => this.setState({ contacts: initialContacts });
 
   render() {
     const { contacts, filter } = this.state;
-    const { deleteContact } = this;
+    const { deleteContact, addContact, changeFilter } = this;
 
-    const normalizedFilter = this.state.filter.toLowerCase();
+    const normalizedFilter = this.state.filter.toLowerCase().trim();
     const filteredContacts = this.state.contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
 
     return (
       <>
-        <Form onSubmit={this.addContact} />
-        <Filter value={filter} onChange={this.changeFilter} />
+        <h1>Phonebook</h1>
+        <Form onSubmit={addContact} />
+
+        <h2>Contacts</h2>
+        <Filter value={filter} onChange={changeFilter} />
         <ContactsList
           contacts={filteredContacts}
           onDeleteContact={deleteContact}

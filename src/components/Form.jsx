@@ -1,4 +1,5 @@
 import { Component } from 'react';
+// import { PropTypes } from 'prop-types';
 
 export class Form extends Component {
   state = { name: '', number: '' };
@@ -11,7 +12,8 @@ export class Form extends Component {
     e.preventDefault();
 
     this.props.onSubmit(this.state);
-    this.setState({ name: '' });
+
+    e.currentTarget.reset();
   };
 
   render() {
