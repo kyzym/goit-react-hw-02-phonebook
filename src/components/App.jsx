@@ -1,10 +1,11 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import initialContacts from './contacts.json';
-import { Form } from './Form';
-import { ContactsList } from './ContactsList';
-import { Filter } from './Filter';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Box } from './utils/Box.styled';
+import initialContacts from './data/contacts.json';
+import { Form } from './ContactsForm/ContactsForm';
+import { ContactsList } from './ContactList/ContactsList';
+import { Filter } from './Filter/Filter';
 
 export class App extends Component {
   state = {
@@ -36,8 +37,6 @@ export class App extends Component {
     this.setState({ filter: e.currentTarget.value.trim() });
   };
 
-  // reset = () => this.setState({ contacts: initialContacts });
-
   render() {
     const { contacts, filter } = this.state;
     const { deleteContact, addContact, changeFilter } = this;
@@ -48,7 +47,7 @@ export class App extends Component {
     );
 
     return (
-      <>
+      <Box display="flex" flexDirection="column" alignItems="center" mt={10}>
         <h1>Phonebook</h1>
         <Form onSubmit={addContact} />
 
@@ -62,7 +61,7 @@ export class App extends Component {
         <div>
           <span>Общее количество контактов: {contacts.length}</span>
         </div>
-      </>
+      </Box>
     );
   }
 }
