@@ -3,10 +3,10 @@ import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Box } from './utils/Box.styled';
 import initialContacts from './data/contacts.json';
+import { FcContacts, FcList } from 'react-icons/fc';
 import { Form } from './ContactsForm/ContactsForm';
 import { ContactsList } from './ContactList/ContactsList';
 import { Filter } from './Filter/Filter';
-import { FcContacts, FcList } from 'react-icons/fc';
 import { Title, SubTitle } from './ContactsForm/ContactForm.styled';
 
 export class App extends Component {
@@ -36,15 +36,15 @@ export class App extends Component {
   };
 
   changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value.trim() });
+    this.setState({ filter: e.target.value });
   };
 
   render() {
     const { contacts, filter } = this.state;
     const { deleteContact, addContact, changeFilter } = this;
 
-    const normalizedFilter = this.state.filter.toLowerCase().trim();
-    const filteredContacts = this.state.contacts.filter(({ name }) =>
+    const normalizedFilter = filter.toLowerCase().trim();
+    const filteredContacts = contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
 

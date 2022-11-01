@@ -6,15 +6,15 @@ export class Form extends Component {
   state = { name: '', number: '' };
 
   handleChange = e => {
-    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleSubmit = e => {
-    const { props } = this;
+    const { props, state } = this;
     e.preventDefault();
 
-    props.onSubmit(this.state);
-    console.log(props);
+    props.onSubmit(state);
+
     e.currentTarget.reset();
   };
 
